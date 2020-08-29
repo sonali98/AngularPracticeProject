@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
-import { Series } from './series';
-
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { Series } from '../series';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-main-nav',
+  templateUrl: './main-nav.component.html',
+  styleUrls: ['./main-nav.component.css']
 })
-export class AppComponent {
- 
+export class MainNavComponent {
+
+  imgurl = "assets/images/sonali.jpeg";
+  imgurl2 = "assets/images/potter.jpg";
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
   series = [
     new Series(1, 'Harry Potter and the philosophers stone'),
     new Series(2, 'Harry Potter and chamber of secrets'),
@@ -19,32 +30,21 @@ export class AppComponent {
     new Series(7, 'Harry Potter and the deathly hollows part 1'),
     new Series(8, 'Harry Potter and the deathly hollows part 2')
   ];
-  msg:String;
-  id = 0;
-  childMsg = "";
-  isShow = false;
+
+  isShow = true;
+  isShowTitle = false;
   public name = "";
-  color:string;
-  
-  
+
+  id=0;
   seriesName:any;
   showName(event){
-
     this.id = event.target.value;
     this.seriesName = this.series[this.id-1];
   }
 
+  childMsg = "";
   onClicked(value){
     this.childMsg = value;
   }
-  emailid="";
-  getEmail(value){
-    this.emailid = value;
-  }
 
-  upperName="";
-  onEnter(value){
-    this.upperName = value;
-  }
 }
-

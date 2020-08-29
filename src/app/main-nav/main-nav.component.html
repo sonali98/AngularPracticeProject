@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <br>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <img [src]="imgurl" class="img">
+    </div>
+    <mat-nav-list>
+      <a mat-list-item href="#">Home</a>
+      <a mat-list-item href="#">About</a>
+      <a mat-list-item href="#">Services</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Sonali Mali</span>
+    </mat-toolbar>
+    <br>
+    <div fxLayout="column" fxLayoutAlign="space-around center" >
+      <img [src]="imgurl2" style="height: 300px;width: 500px;">
+      <h2 style="color:crimson;">Harry Potter</h2>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between stretch" style="margin: 20px;">
+      <mat-card>
+        <button mat-raised-button color="accent" (click)="isShow = !isShow">Show all parts</button>
+        <mat-list *ngIf="isShow">
+          <mat-list-item  *ngFor="let series of series">
+            {{ series.name }}
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-card>
+        <h2>See Partwise Movie Title</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="1">Part 1</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="2">Part 2</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="3">Part 3</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="4">Part 4</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="5">Part 5</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="6">Part 6</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="7">Part 7</button>&nbsp;
+          <button  type="button" mat-raised-button color="primary" (click)="showName($event)" value="8">Part 8</button>&nbsp;
+        </div><br><br>
+        <p>Title : {{seriesName?.name}}</p><br><br>
+        <app-child-component (clicked) = "onClicked($event)" (click)="isShowTitle = !isShowTitle"></app-child-component><br><br>
+        <mat-card-subtitle *ngIf="isShowTitle">Author: {{childMsg}}</mat-card-subtitle>
+      </mat-card>
+
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

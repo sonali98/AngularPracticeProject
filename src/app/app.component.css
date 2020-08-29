@@ -1,0 +1,17 @@
+.navbar {
+    justify-content: left;
+}
+
+.img {
+    height: 300px;
+    width: 500px;
+}
+
+.para{
+    text-align: center;
+    color : red;
+}
+
+p{
+    font-weight:bold;
+}
